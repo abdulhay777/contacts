@@ -86,13 +86,13 @@
       if (await store.dispatch('CheckEmail', formFields)) return email_error.value = 'This email already exists'
 
       if (valid) {
-        store.dispatch('AddContact', formFields)
-        formFields = {
-          fullname: '',
-          email: '',
-          phone_number: '',
-          tags: []
-        }
+        await store.dispatch('AddContact', {
+          fullname: formFields.fullname,
+          email: formFields.email,
+          phone_number: formFields.phone_number,
+          tags: formFields.tags
+        })
+        formEl.resetFields()
       } else {
         console.log('error submit!')
         return false
